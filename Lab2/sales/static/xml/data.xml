@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<data>
+	<shops>
+		<shop name="Silpo" owner="Bogdan">
+            <products>
+                <product name="Kartoha" wholesale_price="2" retail_price="3"></product>
+                <product name="Morkva" wholesale_price="3" retail_price="4"></product>
+                <product name="Chipsi" wholesale_price="20" retail_price="23"></product>
+                <product name="Coca-Cola" wholesale_price="15" retail_price="19"></product>
+                <product name="Pizza" wholesale_price="25" retail_price="42"></product>
+                <product name="Hamburger" wholesale_price="30" retail_price="35"></product>
+                <product name="Pepsi" wholesale_price="15" retail_price="20"></product>
+            </products>
+        </shop>
+
+		<shop name="MegaMarket" owner="Anton">
+            <products>
+                <product name="Kartoha" wholesale_price="2" retail_price="3"></product>
+                <product name="Morkva" wholesale_price="3" retail_price="4"></product>
+                <product name="Chipsi" wholesale_price="20" retail_price="23"></product>
+                <product name="Coca-Cola" wholesale_price="15" retail_price="19"></product>
+                <product name="Pizza" wholesale_price="25" retail_price="42"></product>
+                <product name="Hamburger" wholesale_price="30" retail_price="35"></product>
+                <product name="Pepsi" wholesale_price="15" retail_price="20"></product>
+            </products>
+        </shop>
+
+		<shop name="Fora" owner="Masha">
+            <products>
+                <product name="Kartoha" wholesale_price="2" retail_price="3"></product>
+                <product name="Morkva" wholesale_price="3" retail_price="4"></product>
+                <product name="Chipsi" wholesale_price="20" retail_price="23"></product>
+                <product name="Coca-Cola" wholesale_price="15" retail_price="19"></product>
+                <product name="Pizza" wholesale_price="25" retail_price="42"></product>
+                <product name="Hamburger" wholesale_price="30" retail_price="35"></product>
+                <product name="Pepsi" wholesale_price="15" retail_price="20"></product>
+            </products>
+        </shop>
+
+		<shop name="Ashan" owner="Zhenya">
+            <products>
+                <product name="Kartoha" wholesale_price="2" retail_price="3"></product>
+                <product name="Morkva" wholesale_price="3" retail_price="4"></product>
+                <product name="Chipsi" wholesale_price="20" retail_price="23"></product>
+                <product name="Coca-Cola" wholesale_price="15" retail_price="19"></product>
+                <product name="Pizza" wholesale_price="25" retail_price="42"></product>
+                <product name="Hamburger" wholesale_price="30" retail_price="35"></product>
+                <product name="Pepsi" wholesale_price="15" retail_price="20"></product>
+            </products>
+        </shop>
+
+		<shop name="METRO" owner="Stas">
+            <products>
+                <product name="Kartoha" wholesale_price="2" retail_price="3"></product>
+                <product name="Morkva" wholesale_price="3" retail_price="4"></product>
+                <product name="Chipsi" wholesale_price="20" retail_price="23"></product>
+                <product name="Coca-Cola" wholesale_price="15" retail_price="19"></product>
+                <product name="Pizza" wholesale_price="25" retail_price="42"></product>
+                <product name="Hamburger" wholesale_price="30" retail_price="35"></product>
+                <product name="Pepsi" wholesale_price="15" retail_price="20"></product>
+            </products>
+        </shop>
+	</shops>
+    <products>
+        <product name="Kartoha" wholesale_price="2" retail_price="3"></product>
+        <product name="Morkva" wholesale_price="3" retail_price="4"></product>
+        <product name="Chipsi" wholesale_price="20" retail_price="23"></product>
+        <product name="Coca-Cola" wholesale_price="15" retail_price="19"></product>
+        <product name="Pizza" wholesale_price="25" retail_price="42"></product>
+        <product name="Hamburger" wholesale_price="30" retail_price="35"></product>
+        <product name="Pepsi" wholesale_price="15" retail_price="20"></product>
+    </products>
+</data>

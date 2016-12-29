@@ -1,0 +1,202 @@
+{% extends 'sales/base.html' %}
+{% block content %}
+{% load bootstrap %}
+{% load sales_extras %}
+<div class="panel panel-info">
+   <div class="panel-heading" style="position: relative">
+       Display Options
+       <form action="loadxml" method="post">{% csrf_token %}
+           <button type="submit" class="btn btn-warning" style="position: absolute; right: 20px; margin: 0px">
+                Load XML
+           </button>
+       </form>
+   </div>
+    <form class="form-horizontal" style="padding: 20px" method="post" action="/">{% csrf_token %}
+      <div class="row">
+          <div style="text-align: center" class="col-lg-4">
+              <button type="submit" class="btn btn-success">
+                Filter
+              </button>
+          </div>
+      </div>
+    </form>
+</div>
+<div class="row">
+  <div class="col-lg-6">
+      <table class="table table-hover table-bordered table-responsive">
+        <caption>
+            <h3>Products</h3>
+        </caption>
+        <thead>
+            <th>Name</th>
+            <th>Wholesale Price</th>
+            <th>Retail Price</th>
+        </thead>
+        <tbody>
+            {%  for product in response.products %}
+                <tr>
+                    <td>{{ product.name }}</td><td> {{ product.wholesale_price }} </td> <td> {{ product.retail_price }} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+  </div>
+  <div class="col-lg-6">
+    <table class="table table-hover table-bordered table-responsive">
+        <caption>
+            <h3>Shops</h3>
+        </caption>
+        <thead>
+            <th>Name</th>
+            <th>Owner</th>
+            <th>All Products Quantity</th>
+        </thead>
+        <tbody>
+            {%  for shop in response.shops %}
+                <tr>
+                    <td> {{ shop.name }} </td>
+                    <td> {{ shop.owner }} </td>
+                    <td> {{ shop.products|length }} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+  </div>
+</div>
+
+<div hidden="true" id="editRow">
+  <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">Edit Row</div>
+            <form class="form-horizontal" style="padding: 20px" method="post" action="update">
+                {% csrf_token %}
+                {{ response.editSale|bootstrap }}
+                <button type="submit" class="btn btn-success">Save</button>
+                <button id="editCancelBtn" type="button" class="btn btn-default">Cancel</button>
+            </form>
+        </div>
+      </div>
+      <div class="col-lg-3"></div>
+  </div>
+</div>
+<div hidden="true" id="addRow">
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">Add Row</div>
+                <form action="insert" method="post" class="form-horizontal" style="padding: 20px">
+                    {% csrf_token %}
+                    {{ response.addSale|bootstrap}}
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button id="addCancelBtn" type="button" class="btn btn-default">Cancel</button>
+                </form>
+              </div>
+          </div>
+      <div class="col-lg-3"></div>
+  </div>
+</div>
+
+<div class="panel panel-info" style="position:relative">
+    <div class="panel-heading">Sales
+        <button class="btn btn-success" onclick='onAddClick()' type="button" style="padding: 0 5px 0 5px; position: absolute;  right: 20px">+</button>
+    </div>
+    <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="col-md-8">
+              <table class="table table-hover table-bordered">
+                <caption><h3>Sales</h3></caption>
+                <thead>
+                    <th>Shop</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Date</th>
+                    <th>Delete</th>
+                </thead>
+                <tbody>
+                    {%  for sale in response.sales %}
+                        <tr onclick='onRowClick("{ \"id\": \"{{ sale|getId }}\"," +
+                                                  " \"shop_id\": \"{{ sale.shop|getId }}\"," +
+                                                  " \"product_id\": \"{{ sale.product|getId }}\"," +
+                                                  " \"price\": {{ sale.price }}," +
+                                                  " \"quantity\": {{ sale.quantity }}," +
+                                                  " \"date\": \"{{ sale.date }}\"" +" }")'>
+                            <td>{{ sale.shop.name }}</td>
+                            <td>{{ sale.product.name }}</td>
+                            <td>{{ sale.quantity}}</td>
+                            <td>{{ sale.price }}</td>
+                            <td>{{ sale.date }}</td>
+                            <td align="center">
+                                <form method="post" action="delete">{% csrf_token %}
+                                    <input hidden="true" id="transfer_id" type="text" name="sale_id" value="{{ sale|getId }}">
+                                    <button type="submit" class="btn btn-danger" style="height: 20px; width: 20px; padding: 0 5px 0 5px">x</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+          </div>
+          <div class="col-lg-2"></div>
+    </div>
+</div>
+
+
+<div class="panel panel-info" style="position:relative">
+    <div class="panel-heading">Shop Sales Statistics
+    </div>
+    <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="col-md-8">
+              <table class="table table-hover table-bordered">
+                <caption><h3>Shop Sales Statistics</h3></caption>
+                <thead>
+                    <th>Shop</th>
+                    <th>Max Price</th>
+                    <th>Min Price</th>
+                </thead>
+                <tbody>
+                    {%  for sale in response.sales_stats %}
+                        <tr>
+                            <td>{{ sale|getId }}</td>
+                            <td>{{ sale.maxPrice }}</td>
+                            <td>{{ sale.minPrice }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+          </div>
+          <div class="col-lg-2"></div>
+    </div>
+</div>
+
+<div class="panel panel-info" style="position:relative">
+    <div class="panel-heading">Total Sales
+    </div>
+    <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="col-md-8">
+              <table class="table table-hover table-bordered">
+                <caption><h3>Total Sales</h3></caption>
+                <thead>
+                    <th>Shop</th>
+                    <th>Sum</th>
+                </thead>
+                <tbody>
+                    {%  for shop in response.shop_sales %}
+                        <tr>
+                            <td>{{ shop|getId }}</td>
+                            <td>{{ shop.value }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+          </div>
+          <div class="col-lg-2"></div>
+    </div>
+</div>
+
+{% endblock content %}
